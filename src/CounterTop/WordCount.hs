@@ -1,9 +1,21 @@
-module CounterTop.WordCount() where
+{-# LANGUAGE TypeSynonymInstances #-}
+{-# LANGUAGE FlexibleInstances #-}
+
+module CounterTop.WordCount(countWords, WordCount) where
 
 import qualified Data.Map.Strict as Map
+import Data.Monoid
 
 -- Type Synonym for a map from Strings to Integers
 type WordCount = Map.Map String Integer
+
+instance Monoid WordCount where
+    -- The identity element is an empty WordCount map
+    mempty = wordCount
+
+    -- The combintion operation combines the counts
+    -- of all same keys between both maps
+    mappend = Map.unionWith (+) 
 
 -- Simple Constructor for WordCount
 -- Creates an empty map
