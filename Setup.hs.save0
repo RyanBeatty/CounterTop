@@ -1,0 +1,2 @@
+mport Distribution.Simple
+main = defaultMain
