@@ -1,4 +1,4 @@
-module CounterTop.WordCount(countWords, WordCount) where
+module CounterTop.WordCount(countWords, WordCount(), lookupWord) where
 
 import qualified Data.Map.Strict as Map
 import Data.Monoid
@@ -40,4 +40,7 @@ proccessContents = foldr (proccessLine) newWordCount . lines
 -- simple name binding for proccessContents
 countWords :: String -> WordCount
 countWords = proccessContents
+
+lookupWord :: String -> WordCount -> Maybe Integer
+lookupWord word wc = Map.lookup word (wordcount wc)
 
