@@ -13,8 +13,8 @@ main = do
     filenames <- filterM doesFileExist args
     contents <- mapM readFile filenames
     let counts = map countWords contents
-        result = (mconcat counts) :: WordCount
-    print filenames
+        result = mconcat counts
+    print result
     
 
 

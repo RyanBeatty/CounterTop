@@ -6,7 +6,7 @@ import Data.Monoid
 -- Type Synonym for a map from Strings to Integers
 data WordCount = WordCount {
     wordcount :: Map.Map String Integer
-}
+} deriving(Show)
 
 instance Monoid WordCount where
     -- The identity element is an empty WordCount map
