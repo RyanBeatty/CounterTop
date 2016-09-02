@@ -24,10 +24,14 @@ wordCount map = WordCount map
 newWordCount :: WordCount
 newWordCount = wordCount Map.empty
 
+-- Wrapper functions around Data.Map operations
+lookup k = (Map.lookup k . wordcount)
+insertWith f k v = (wordCount . Map.insertWith f k v . wordcount)
+
 -- Adds a word to the word count map if it doesn't exist
 -- and increments occurence if it does
 processWord :: String -> WordCount -> WordCount
-processWord word wc = wordCount . Map.insertWith (+) word 1 . wordcount $ wc
+processWord word wc = insertWith (+) word 1 wc
 
 -- Counts all word occurences in a line
 proccessLine :: String -> WordCount -> WordCount
@@ -42,5 +46,5 @@ countWords :: String -> WordCount
 countWords = proccessContents
 
 lookupWord :: String -> WordCount -> Maybe Integer
-lookupWord word wc = Map.lookup word (wordcount wc)
+lookupWord = CounterTop.WordCount.lookup
 
